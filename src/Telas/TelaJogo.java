@@ -2,11 +2,16 @@
 package Telas;
 
 import Modelo.Questao;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class TelaJogo extends javax.swing.JFrame {
 
+    private List<Questao> questoes = new ArrayList <>();
+    private int indexQuestaoAtual = 0;
+    private Questao questao;
+    
   
     public TelaJogo() {
         initComponents();
@@ -24,13 +29,13 @@ public TelaJogo(List<Questao>listQuestoes){
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaQuestao = new javax.swing.JTextArea();
         jRadioButtonRespostas1 = new javax.swing.JRadioButton();
-        jRadioButtonrRespostas2 = new javax.swing.JRadioButton();
+        jRadioButtonRespostas2 = new javax.swing.JRadioButton();
         jRadioButtonRespostas3 = new javax.swing.JRadioButton();
         jRadioButtonRespostas4 = new javax.swing.JRadioButton();
         jButtonNext = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelContador = new javax.swing.JLabel();
         jButtonConcluir = new javax.swing.JButton();
 
         jTextArea2.setColumns(20);
@@ -39,15 +44,15 @@ public TelaJogo(List<Questao>listQuestoes){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaQuestao.setEditable(false);
+        jTextAreaQuestao.setColumns(20);
+        jTextAreaQuestao.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
+        jTextAreaQuestao.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaQuestao);
 
         buttonGroupRespostas.add(jRadioButtonRespostas1);
 
-        buttonGroupRespostas.add(jRadioButtonrRespostas2);
+        buttonGroupRespostas.add(jRadioButtonRespostas2);
 
         buttonGroupRespostas.add(jRadioButtonRespostas3);
 
@@ -55,8 +60,8 @@ public TelaJogo(List<Questao>listQuestoes){
 
         jButtonNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_Next_27860.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
-        jLabel1.setText("Questao 0");
+        jLabelContador.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
+        jLabelContador.setText("Questao 0");
 
         jButtonConcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_sign-check_299110.png"))); // NOI18N
 
@@ -76,9 +81,9 @@ public TelaJogo(List<Questao>listQuestoes){
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButtonRespostas4)
                             .addComponent(jRadioButtonRespostas3)
-                            .addComponent(jRadioButtonrRespostas2)
+                            .addComponent(jRadioButtonRespostas2)
                             .addComponent(jRadioButtonRespostas1)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabelContador))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -86,13 +91,13 @@ public TelaJogo(List<Questao>listQuestoes){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelContador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonRespostas1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonrRespostas2)
+                .addComponent(jRadioButtonRespostas2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonRespostas3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -144,14 +149,29 @@ public TelaJogo(List<Questao>listQuestoes){
     private javax.swing.ButtonGroup buttonGroupRespostas;
     private javax.swing.JButton jButtonConcluir;
     private javax.swing.JButton jButtonNext;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelContador;
     private javax.swing.JRadioButton jRadioButtonRespostas1;
+    private javax.swing.JRadioButton jRadioButtonRespostas2;
     private javax.swing.JRadioButton jRadioButtonRespostas3;
     private javax.swing.JRadioButton jRadioButtonRespostas4;
-    private javax.swing.JRadioButton jRadioButtonrRespostas2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextAreaQuestao;
     // End of variables declaration//GEN-END:variables
+
+private void updateTela(){
+        
+    questao = questoes.get(indexQuestaoAtual) ;
+    jTextAreaQuestao.setText(questao.getEnunciado());
+    jRadioButtonRespostas1.setText(questao.getRespostas().get(1));
+    jRadioButtonRespostas2.setText(questao.getRespostas().get(2));
+    jRadioButtonRespostas3.setText(questao.getRespostas().get(3));
+    jRadioButtonRespostas4.setText(questao.getRespostas().get(4));
+
+    
+    jLabelContador.setText(String.valueOf(indexQuestaoAtual+1));
+}
+
+
 }

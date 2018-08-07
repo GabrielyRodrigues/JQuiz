@@ -243,9 +243,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonJogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJogarActionPerformed
             
+        if (questoes.size()!=0){
         TelaJogo tg = new TelaJogo(questoes);
         tg.setVisible(true);
-        
+        this.dispose();
+        }else {
+         JOptionPane.showMessageDialog(null, "Insira pelo menos um Registro!");
+        }
        
     }//GEN-LAST:event_jButtonJogarActionPerformed
 
