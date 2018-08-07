@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
         RadioDois = new javax.swing.JRadioButton();
         RadioTres = new javax.swing.JRadioButton();
         RadioQuarta = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelContador = new javax.swing.JLabel();
         jButtonLimpar = new javax.swing.JButton();
         jButtonJogar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -64,8 +64,8 @@ public class Principal extends javax.swing.JFrame {
         buttonGroupRespostas.add(RadioQuarta);
         RadioQuarta.setFont(new java.awt.Font("aakar", 2, 14)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("aakar", 0, 36)); // NOI18N
-        jLabel1.setText("OO");
+        jLabelContador.setFont(new java.awt.Font("Dialog", 2, 36)); // NOI18N
+        jLabelContador.setText("OO");
 
         jButtonLimpar.setFont(new java.awt.Font("aakar", 2, 18)); // NOI18N
         jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_1_2058800.png"))); // NOI18N
@@ -104,6 +104,14 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("aakar", 2, 18)); // NOI18N
         jLabel3.setText("Questoes!");
+
+        jTextFieldRespUm.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
+
+        jTextFieldRespDois.setFont(new java.awt.Font("aakar", 1, 18)); // NOI18N
+
+        jTextFieldRespTres.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
+
+        jTextFieldRespQuatro.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -156,17 +164,17 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonReiniciar)
                             .addComponent(jButtonJogar))
-                        .addGap(0, 8, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelContador, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(33, 33, 33)
@@ -185,8 +193,9 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabelContador, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
@@ -201,7 +210,7 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(RadioDois))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldRespDois, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)))
+                                        .addComponent(jTextFieldRespDois)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldRespTres, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -266,6 +275,20 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os Erros!");
       
         }else{
+            
+            Questao q = new Questao ();
+            q.setEnunciado(questao);
+            List<String> respostas = new ArrayList<>();
+            respostas.add(respostas1);
+            respostas.add(respostas2);
+            respostas.add(respostas3);
+            respostas.add(respostas4);
+            q.setRespostas(respostas);
+            q.setCorrectIndex(indexCorreto);
+             
+            questoes.add(q);
+            limparCampos();
+            updateContador();
         
         
         
@@ -276,8 +299,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReiniciarActionPerformed
      
+        int r = JOptionPane.showConfirmDialog(null, "Deseja Reiniciar o jogo ?");
+        if (r== JOptionPane.YES_OPTION){
+        questoes.clear();
+        limparCampos();
+        jLabelContador.setText("00");
         
-        
+        }
     }//GEN-LAST:event_jButtonReiniciarActionPerformed
 
    
@@ -323,9 +351,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonJogar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonReiniciar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelContador;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -361,5 +389,12 @@ buttonGroupRespostas.clearSelection();
         
     }
 
+   private void updateContador(){
+    
+    jLabelContador.setText(String.valueOf(questoes.size()));
+    
+    
+    
+    }
 
 }
