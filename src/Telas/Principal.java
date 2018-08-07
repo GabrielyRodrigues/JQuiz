@@ -107,7 +107,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTextFieldRespUm.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
 
-        jTextFieldRespDois.setFont(new java.awt.Font("aakar", 1, 18)); // NOI18N
+        jTextFieldRespDois.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
 
         jTextFieldRespTres.setFont(new java.awt.Font("aakar", 0, 18)); // NOI18N
 
@@ -243,6 +243,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonJogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJogarActionPerformed
             
+        TelaJogo tg = new TelaJogo(questoes);
+        tg.setVisible(true);
         
        
     }//GEN-LAST:event_jButtonJogarActionPerformed
