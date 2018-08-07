@@ -1,13 +1,21 @@
 
 package Telas;
 
+
 import javax.swing.JOptionPane;
+import Modelo.Questao;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Principal extends javax.swing.JFrame {
 
+    
+    private List<Questao> questoes = new ArrayList<>();
+    
     public Principal() {
         initComponents();
+        System.out.println("");
     }
 
    
@@ -88,6 +96,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButtonReiniciar.setFont(new java.awt.Font("aakar", 2, 18)); // NOI18N
         jButtonReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_Revert_132070.png"))); // NOI18N
+        jButtonReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReiniciarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("aakar", 2, 18)); // NOI18N
         jLabel3.setText("Questoes!");
@@ -109,13 +122,16 @@ public class Principal extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(RadioTres))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextFieldRespDois, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(RadioDois))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextFieldRespUm, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(RadioUm)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldRespUm)
+                                        .addComponent(jTextFieldRespDois, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(RadioDois))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(10, 10, 10)
+                                            .addComponent(RadioUm)))))
                             .addGap(39, 39, 39))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addContainerGap()
@@ -191,11 +207,11 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(RadioTres)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(RadioQuarta)
-                            .addComponent(jTextFieldRespQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jTextFieldRespQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -217,7 +233,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonJogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJogarActionPerformed
-        System.out.println(jTextAreaQuestao.getText());      
+            
         
        
     }//GEN-LAST:event_jButtonJogarActionPerformed
@@ -247,9 +263,8 @@ public class Principal extends javax.swing.JFrame {
                 indexCorreto == -1){
         
             
-            JOptionPane.showConfirmDialog(null, "Preencha todos os Erros!");
-          
-        
+            JOptionPane.showMessageDialog(null, "Preencha todos os Erros!");
+      
         }else{
         
         
@@ -259,9 +274,13 @@ public class Principal extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButtonReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReiniciarActionPerformed
+     
+        
+        
+    }//GEN-LAST:event_jButtonReiniciarActionPerformed
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -333,7 +352,7 @@ buttonGroupRespostas.clearSelection();
 
     private int getRadioIndexCorreto() {
  
-        if(RadioUm.isSelected()) return 1;
+        if (RadioUm.isSelected()) return 1;
         if (RadioDois.isSelected()) return 2;
         if (RadioTres.isSelected()) return 3;
         if (RadioQuarta.isSelected()) return 4;
