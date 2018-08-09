@@ -47,7 +47,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="376" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButtonConcluir" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConcluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonNext" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -84,7 +84,7 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButtonNext" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonConcluir" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnConcluir" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -157,12 +157,15 @@
         <Property name="text" type="java.lang.String" value="Questao 0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonConcluir">
+    <Component class="javax.swing.JButton" name="btnConcluir">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/if_sign-check_299110.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConcluirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -3,6 +3,7 @@ package Telas;
 import Modelo.Questao;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class TelaJogo extends javax.swing.JFrame {
 
@@ -16,11 +17,11 @@ public class TelaJogo extends javax.swing.JFrame {
     }
 
     public TelaJogo(List<Questao> listQuestoes) {
-        
+
         initComponents();
         questoes = listQuestoes;
         updateTela();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +39,7 @@ public class TelaJogo extends javax.swing.JFrame {
         jRadioButtonRespostas4 = new javax.swing.JRadioButton();
         jButtonNext = new javax.swing.JButton();
         jLabelContador = new javax.swing.JLabel();
-        jButtonConcluir = new javax.swing.JButton();
+        btnConcluir = new javax.swing.JButton();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -70,7 +71,12 @@ public class TelaJogo extends javax.swing.JFrame {
         jLabelContador.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
         jLabelContador.setText("Questao 0");
 
-        jButtonConcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_sign-check_299110.png"))); // NOI18N
+        btnConcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_sign-check_299110.png"))); // NOI18N
+        btnConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,7 +87,7 @@ public class TelaJogo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonConcluir)
+                        .addComponent(btnConcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonNext))
                     .addGroup(layout.createSequentialGroup()
@@ -112,7 +118,7 @@ public class TelaJogo extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonNext)
-                    .addComponent(jButtonConcluir))
+                    .addComponent(btnConcluir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -120,12 +126,32 @@ public class TelaJogo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-     
-        corrigir();
-        indexQuestaoAtual++;
-        updateTela();
-        
+
+        try {
+            corrigir();
+            indexQuestaoAtual++;
+            updateTela();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Preencha a Resposta!", "Erro!", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }//GEN-LAST:event_jButtonNextActionPerformed
+
+    private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+
+        try {
+            corrigir();
+            TelaResultado tr = new TelaResultado(null, true, acerto, questoes.size());
+            tr.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Preencha a Resposta!", "Erro!", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_btnConcluirActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -160,8 +186,8 @@ public class TelaJogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConcluir;
     private javax.swing.ButtonGroup buttonGroupRespostas;
-    private javax.swing.JButton jButtonConcluir;
     private javax.swing.JButton jButtonNext;
     private javax.swing.JLabel jLabelContador;
     private javax.swing.JRadioButton jRadioButtonRespostas1;
@@ -174,29 +200,51 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaQuestao;
     // End of variables declaration//GEN-END:variables
 
-    private void corrigir (){
-    
-    if(getSelectedRadio()==questao.getCorrectIndex());
-    acerto++;
-    
-    
-    }
-    
-    private int getSelectedRadio(){
-    if(jRadioButtonRespostas1.isSelected()) return 0;
-    if(jRadioButtonRespostas2.isSelected()) return 1;
-    if(jRadioButtonRespostas3.isSelected()) return 2;
-    if(jRadioButtonRespostas4.isSelected()) return 3;
-    
-    
-    return -1;
-    
-    }
-    
-    
-    
-    private void updateTela() {
+    private void corrigir() throws Exception {
+
+        if (getSelectedRadio() == -1) {
+
+            throw new Exception("ERRO!");
+        }
+
+        if (getSelectedRadio() == questao.getCorrectIndex()){
+            acerto++;
+        }
+            
         
+
+    }
+
+    private int getSelectedRadio() {
+        if (jRadioButtonRespostas1.isSelected()) {
+            return 0;
+        }
+        if (jRadioButtonRespostas2.isSelected()) {
+            return 1;
+        }
+        if (jRadioButtonRespostas3.isSelected()) {
+            return 2;
+        }
+        if (jRadioButtonRespostas4.isSelected()) {
+            return 3;
+        }
+
+        return -1;
+
+    }
+
+    private void updateTela() {
+
+        if (questoes.size() == indexQuestaoAtual + 1) {
+
+            btnConcluir.setEnabled(true);
+            jButtonNext.setEnabled(false);
+
+        } else {
+            btnConcluir.setEnabled(false);
+            jButtonNext.setEnabled(true);
+        }
+
         buttonGroupRespostas.clearSelection();
 
         questao = questoes.get(indexQuestaoAtual);
@@ -207,7 +255,7 @@ public class TelaJogo extends javax.swing.JFrame {
         jRadioButtonRespostas4.setText(questao.getRespostas().get(3));
 
         jLabelContador.setText(String.valueOf(indexQuestaoAtual + 1));
-        
+
     }
 
 }
