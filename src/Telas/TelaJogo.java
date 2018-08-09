@@ -9,6 +9,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private List<Questao> questoes = new ArrayList<>();
     private int indexQuestaoAtual = 0;
     private Questao questao;
+    private int acerto = 0;
 
     public TelaJogo() {
         initComponents();
@@ -119,8 +120,10 @@ public class TelaJogo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-      
-        
+     
+        corrigir();
+        indexQuestaoAtual++;
+        updateTela();
         
     }//GEN-LAST:event_jButtonNextActionPerformed
 
@@ -171,7 +174,30 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaQuestao;
     // End of variables declaration//GEN-END:variables
 
+    private void corrigir (){
+    
+    if(getSelectedRadio()==questao.getCorrectIndex());
+    acerto++;
+    
+    
+    }
+    
+    private int getSelectedRadio(){
+    if(jRadioButtonRespostas1.isSelected()) return 0;
+    if(jRadioButtonRespostas2.isSelected()) return 1;
+    if(jRadioButtonRespostas3.isSelected()) return 2;
+    if(jRadioButtonRespostas4.isSelected()) return 3;
+    
+    
+    return -1;
+    
+    }
+    
+    
+    
     private void updateTela() {
+        
+        buttonGroupRespostas.clearSelection();
 
         questao = questoes.get(indexQuestaoAtual);
         jTextAreaQuestao.setText(questao.getEnunciado());
