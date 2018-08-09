@@ -1,26 +1,27 @@
-
 package Telas;
 
 import Modelo.Questao;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class TelaJogo extends javax.swing.JFrame {
 
-    private List<Questao> questoes = new ArrayList <>();
+    private List<Questao> questoes = new ArrayList<>();
     private int indexQuestaoAtual = 0;
     private Questao questao;
-    
-  
+
     public TelaJogo() {
         initComponents();
     }
-public TelaJogo(List<Questao>listQuestoes){
-    initComponents();
-    
-}
-  
+
+    public TelaJogo(List<Questao> listQuestoes) {
+        
+        initComponents();
+        questoes = listQuestoes;
+        updateTela();
+        
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -59,6 +60,11 @@ public TelaJogo(List<Questao>listQuestoes){
         buttonGroupRespostas.add(jRadioButtonRespostas4);
 
         jButtonNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_Next_27860.png"))); // NOI18N
+        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextActionPerformed(evt);
+            }
+        });
 
         jLabelContador.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
         jLabelContador.setText("Questao 0");
@@ -112,7 +118,12 @@ public TelaJogo(List<Questao>listQuestoes){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- 
+    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
+      
+        
+        
+    }//GEN-LAST:event_jButtonNextActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -160,18 +171,17 @@ public TelaJogo(List<Questao>listQuestoes){
     private javax.swing.JTextArea jTextAreaQuestao;
     // End of variables declaration//GEN-END:variables
 
-private void updateTela(){
+    private void updateTela() {
+
+        questao = questoes.get(indexQuestaoAtual);
+        jTextAreaQuestao.setText(questao.getEnunciado());
+        jRadioButtonRespostas1.setText(questao.getRespostas().get(0));
+        jRadioButtonRespostas2.setText(questao.getRespostas().get(1));
+        jRadioButtonRespostas3.setText(questao.getRespostas().get(2));
+        jRadioButtonRespostas4.setText(questao.getRespostas().get(3));
+
+        jLabelContador.setText(String.valueOf(indexQuestaoAtual + 1));
         
-    questao = questoes.get(indexQuestaoAtual) ;
-    jTextAreaQuestao.setText(questao.getEnunciado());
-    jRadioButtonRespostas1.setText(questao.getRespostas().get(1));
-    jRadioButtonRespostas2.setText(questao.getRespostas().get(2));
-    jRadioButtonRespostas3.setText(questao.getRespostas().get(3));
-    jRadioButtonRespostas4.setText(questao.getRespostas().get(4));
-
-    
-    jLabelContador.setText(String.valueOf(indexQuestaoAtual+1));
-}
-
+    }
 
 }
